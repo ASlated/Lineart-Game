@@ -51,7 +51,6 @@ function create() {
   });
 }
 
-
 var updateCount = 0;
 
 function update() {
