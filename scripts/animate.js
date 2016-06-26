@@ -1,12 +1,13 @@
-var game = new Phaser.Game(2048, 1024, Phaser.AUTO, '', { preload: preload, init: init, create: create, update: update })
+var game = new Phaser.Game(256, 240, Phaser.AUTO, '', { preload: preload, init: init, create: create, update: update })
 
 function preload() {
   game.load.spritesheet('guy', 'assets/guy.png', 17, 26)
 
-  game.load.image('ladybug', 'assets/ladybug.png');
+  game.load.image('ladybug-old', 'assets/ladybug.png');
 
   game.load.image('tileset', 'assets/tileset.png')
   game.load.tilemap('tilemap', 'assets/tilemap.csv')
+  game.load.spritesheet('ladybug', 'assets/ladybugs.png', 20, 17)
 }
 
 function init() {
@@ -30,7 +31,7 @@ function create() {
   }
 
   game.stage.backgroundColor = '#99cccc';
-  // game.world.resize(2048, 1024);
+  game.world.resize(2048, 1024);
   game.physics.startSystem(Phaser.Physics.ARCADE);
   map = game.add.tilemap('tilemap', 16, 16)
   map.addTilesetImage('tileset');
@@ -48,6 +49,7 @@ function create() {
     ladybug.body.collideWorldBounds = true;
     ladybug.body.gravity.y = 600;
     ladybug.body.velocity.x = -40;
+    ladybug.animations.add('left', [4, 5, 6, 7], 10, true);
   });
 }
 
@@ -59,6 +61,7 @@ function update() {
 
   ladybugs.forEach(function(ladybug) {
     game.physics.arcade.collide(ladybug, layer);
+    ladybug.animations.play('left');
   });
 
   game.physics.arcade.collide(player, layer);
