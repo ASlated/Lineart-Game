@@ -33,9 +33,6 @@ function create() {
   player.body.collideWorldBounds = true;
 }
 
-var currX;
-var currY;
-
 function update() {
   game.physics.arcade.collide(player, layer);
   game.camera.follow(player);
