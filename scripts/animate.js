@@ -1,20 +1,21 @@
 const LADYBUG_SPEED = 40;
 
-var game = new Phaser.Game(512, 480, Phaser.AUTO, '', { preload: preload, init: init, create: create, update: update })
+var game = new Phaser.Game(256, 240, Phaser.AUTO, '', { preload: preload, init: init, create: create, update: update })
 
 function preload() {
   game.load.spritesheet('guy', 'assets/guy.png', 17, 26)
   game.load.image('tileset', 'assets/tileset.png')
   game.load.tilemap('tilemap', 'assets/tilemap.csv')
-  game.load.spritesheet('ladybug', 'assets/ladybugs.png', 20, 17)
+  game.load.spritesheet('ladybug', 'assets/ladybugs.png', 32, 24)
 }
 
 function init() {
-  // game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
-  // game.scale.setUserScale(2, 2);
-  // game.renderer.renderSession.roundPixels = true;
-  // Phaser.Canvas.setImageRenderingCrisp(this.game.canvas);
+  game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
+  game.scale.setUserScale(2, 2);
+  game.renderer.renderSession.roundPixels = true;
+  Phaser.Canvas.setImageRenderingCrisp(this.game.canvas);
 }
+
 
 var player;
 var map;
@@ -51,8 +52,8 @@ function create() {
     ladybug.body.collideWorldBounds = true;
     ladybug.body.gravity.y = 600;
     ladybug.body.velocity.x = ((Math.random() * 60) + 20) * -1;
-    ladybug.animations.add('right', [0, 1, 2, 3], 10, true);
-    ladybug.animations.add('left', [4, 5, 6, 7], 10, true);
+    ladybug.animations.add('right', [0, 1, 2, 3, 4, 3, 2, 1], 10, true);
+    ladybug.animations.add('left', [5, 6, 7, 8, 9, 8, 7, 6], 10, true);
     ladybug.facing = 'left';
     ladybug.body.bounce.set(1);
   });
